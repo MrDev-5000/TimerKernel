@@ -3,16 +3,16 @@
 #include <Arduino.h>
 #include <math.h>
 
-TimerKernel::TimerKernel() {
-    this->toggleStatePhase = WAIT_MILLIS;
-    this->hasExpiredPhase = WAIT_MILLIS;
-    this->state = false;
-    this->previousMillis = 0;
-    this->previousMicros = 0;
-    this->currentMicros = 0;
-    this->currentMillis = 0;
-    this->elapsedTime = 0;
-}
+
+TimerKernel::TimerKernel() : 
+    toggleStatePhase(WAIT_MILLIS),
+    hasExpiredPhase(WAIT_MILLIS),
+    previousMillis(0),
+    previousMicros(0),
+    currentMillis(0),
+    currentMicros(0),
+    elapsedTime(0),
+    state(false)
 
 
 void TimerKernel::resetTimer() {
