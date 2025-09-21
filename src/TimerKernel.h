@@ -19,14 +19,14 @@ private:
         WAIT_MICROS
     };
 
+    TimerPhase toggleStatePhase;
+    TimerPhase hasExpiredPhase;
     unsigned long previousMillis;
     unsigned long previousMicros;
     unsigned long currentMillis;
     unsigned long currentMicros;
     unsigned long elapsedTime;
     bool state;
-    TimerPhase toggleStatePhase;
-    TimerPhase hasExpiredPhase;
 
 public:
     TimerKernel();

@@ -12,7 +12,7 @@ TimerKernel::TimerKernel() :
     currentMillis(0),
     currentMicros(0),
     elapsedTime(0),
-    state(false)
+    state(false) {}
 
 
 void TimerKernel::resetTimer() {
