@@ -22,9 +22,10 @@ To install this library:
 4. **Done!**  
    The library is now installed and ready to use. You can find examples for this library in **File > Examples > TimerKernel**.
 
->**Note:**  
->- Do **not** unzip the downloaded file before installing.  
->- If you are updating an existing library, delete the old version from your `libraries` folder first.
+>**Note:**
+>
+> - Do **not** unzip the downloaded file before installing.  
+> - If you are updating an existing library, delete the old version from your `libraries` folder first.
 
 ## Examples
 
