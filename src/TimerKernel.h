@@ -31,12 +31,12 @@ private:
 public:
     TimerKernel();
     void resetTimer();
-    bool toggleState(long double duration, TimeUnit unit = MILLISECOND);
-    bool hasExpired(long double duration, TimeUnit unit = MILLISECOND);
+    bool toggleState(double duration, TimeUnit unit = MILLISECOND);
+    bool hasExpired(double duration, TimeUnit unit = MILLISECOND);
 
 private:
     void updateCurrentTime();
-    unsigned long convertToMicrosecond(long double duration, TimeUnit unit);
+    unsigned long convertToMicrosecond(double duration, TimeUnit unit);
 
 };
 

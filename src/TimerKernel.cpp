@@ -31,7 +31,7 @@ void TimerKernel::updateCurrentTime() {
 }
 
 
-bool TimerKernel::toggleState(long double duration, TimeUnit unit) {
+bool TimerKernel::toggleState(double duration, TimeUnit unit) {
 
     unsigned long durationInMicros = convertToMicrosecond(duration, unit);
     unsigned long durationInMillis = durationInMicros / 1000UL;
@@ -62,7 +62,7 @@ bool TimerKernel::toggleState(long double duration, TimeUnit unit) {
 }
 
 
-bool TimerKernel::hasExpired(long double duration, TimeUnit unit) {
+bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
 
     unsigned long durationInMicros = convertToMicrosecond(duration, unit);
     unsigned long durationInMillis = durationInMicros / 1000UL;
@@ -93,7 +93,7 @@ bool TimerKernel::hasExpired(long double duration, TimeUnit unit) {
 }
 
 
-unsigned long TimerKernel::convertToMicrosecond(long double duration, TimeUnit unit) {
+unsigned long TimerKernel::convertToMicrosecond(double duration, TimeUnit unit) {
     unsigned long durationInMicros = 0;
 
     switch (unit) {

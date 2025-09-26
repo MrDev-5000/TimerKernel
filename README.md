@@ -5,6 +5,7 @@
 ---
 
 ## 🚀 Features
+
 - Non-Blocking, No `delay()`, for best code responsiveness
 - Support for multiple time units (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`)
 - Multiple independent timers can be used simultaneously
@@ -34,9 +35,10 @@ To install this library:
 > - Do **not** unzip the downloaded file before installing.  
 > - If you are updating an existing library, delete the old version from your `libraries` folder first.
 
+## 🛠️ Usage
 
-## 🛠️	 Usage 
 Traditionally, using `millis()` for timed events requires manual tracking of multiple variables:
+
 ```cpp
 unsigned long previousMillis_1 = 0; //store time for first event
 unsigned long previousMillis_2 = 0; //store time for second event
@@ -67,7 +69,9 @@ unsigned long currentMillis = millis();
    }
 }
 ```
+
 With TimerKernel, this becomes much simpler and easier to manage:
+
 ```cpp
 #include <TimerKernel.h>
 
@@ -97,15 +101,17 @@ void loop() {
 ```
 
 ## 📖 Examples
- 
+
 - [simple_led_blink](examples/simple_led_blink/simple_led_blink.ino) - demonstrates how to use the `toggleState()` to blink a led.
 
 ## 📚 API Reference
+
 ### `hasExpired()`
 
 ```cpp
   bool hasExpired(double duration, TimeUnit unit);
 ```
+
 Checks whether the specified time duration has passed.
 
 | Parameter  | Type     | Description                                                  |
@@ -113,7 +119,8 @@ Checks whether the specified time duration has passed.
 | `duration` | `double` | Time interval in desired unit                                |
 | `unit`     | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
 
-#### **Returns**
+**Returns:**
+
 - `true` if the time duration has elapsed, otherwise it returns `false`.
 
 ---
@@ -123,6 +130,7 @@ Checks whether the specified time duration has passed.
 ```cpp
   bool toggleState(double duration, TimeUnit unit);
 ```
+
 Toggles state every time the duration elapses.
 
 | Parameter  | Type     | Description                                                  |
@@ -130,7 +138,8 @@ Toggles state every time the duration elapses.
 | `duration` | `double` | Time interval in desired unit                                |
 | `unit`     | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
 
-#### **Returns**
+**Returns:**
+
 - The toggled state (`true` or `false`).
 
 ---
@@ -140,13 +149,13 @@ Toggles state every time the duration elapses.
 ```cpp
   void resetTimer();
 ```
+
 Resets both `hasExpired()` and `toggleState()`, so they start counting from zero.
 
-#### **Returns**
-- Nothing
+**Returns:**
 
+- Nothing
 
 ## 📜 License
 
 - This project is licensed under the [MIT License](LICENSE).
-
