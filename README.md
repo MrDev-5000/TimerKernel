@@ -109,10 +109,11 @@ void loop() {
 ### `hasExpired()`
 
 ```cpp
-  bool hasExpired(double duration, TimeUnit unit);
+  bool hasExpired(double duration, TimeUnit unit = MILLISECOND);
 ```
 
 Checks whether the specified time duration has passed.
+By default, the duration is expressed in milliseconds.
 
 | Parameter  | Type     | Description                                                  |
 | :--------  | :------- | :----------------------------------------------------------- |
@@ -128,10 +129,11 @@ Checks whether the specified time duration has passed.
 ### `toggleState()`
 
 ```cpp
-  bool toggleState(double duration, TimeUnit unit);
+  bool toggleState(double duration, TimeUnit unit = MILLISECOND);
 ```
 
 Toggles state every time the duration elapses.
+By default, the duration is expressed in milliseconds.
 
 | Parameter  | Type     | Description                                                  |
 | :--------  | :------- | :----------------------------------------------------------- |
