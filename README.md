@@ -158,6 +158,34 @@ Resets both `hasExpired()` and `toggleState()`, so they start counting from zero
 
 - Nothing
 
+---
+
+### `resetToggleState()`
+
+```cpp
+  void resetToggleState();
+```
+
+Resets `toggleState()`, so it starts counting from zero.
+
+**Returns:**
+
+- Nothing
+
+---
+
+### `resetHasExpired()`
+
+```cpp
+  void resetHasExpired();
+```
+
+Resets `hasExpired()`, so it starts counting from zero.
+
+**Returns:**
+
+- Nothing
+
 ## 📜 License
 
 - This project is licensed under the [MIT License](LICENSE).

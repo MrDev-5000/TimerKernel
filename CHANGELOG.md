@@ -1,5 +1,9 @@
 # Change log
 
+## v1.1.3
+
+- Add: method to reset `toggleState()` and `hasExpired()` separately.
+
 ## v1.0.3
 
 - Refactor: updated parameter data type from `long double` to `double`.

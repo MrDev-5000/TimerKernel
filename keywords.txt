@@ -1,12 +1,14 @@
 
-TimerKernel	KEYWORD1
-TimeUnit	KEYWORD1
+TimerKernel    	  KEYWORD1
+TimeUnit	      KEYWORD1
 
-hasExpired	KEYWORD2
-toggleState	KEYWORD2
-resetTimer	KEYWORD2
+hasExpired	      KEYWORD2
+toggleState    	  KEYWORD2
+resetTimer	      KEYWORD2
+resetHasExpired   KEYWORD2
+resetToggleState  KEYWORD2
 
-MINUTE	KEYWORD2
-SECOND	KEYWORD2
-MILLISECOND	KEYWORD2
-MICROSECOND	KEYWORD2
+MINUTE	          KEYWORD2
+SECOND	          KEYWORD2
+MILLISECOND	      KEYWORD2
+MICROSECOND	      KEYWORD2

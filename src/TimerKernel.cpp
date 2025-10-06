@@ -7,17 +7,21 @@
 TimerKernel::TimerKernel() : 
     toggleStatePhase(WAIT_MILLIS),
     hasExpiredPhase(WAIT_MILLIS),
-    previousMillis(0),
-    previousMicros(0),
-    currentMillis(0),
-    currentMicros(0),
+    previousMillis_1(0),
+    previousMicros_1(0),
+    currentMillis_1(0),
+    currentMicros_1(0),
+    previousMillis_2(0),
+    previousMicros_2(0),
+    currentMillis_2(0),
+    currentMicros_2(0),
     elapsedTime(0),
     state(false) {}
 
 
 void TimerKernel::resetTimer() {
-    this->previousMillis = this->currentMillis = millis();
-    this->previousMicros = this->currentMicros = micros();
+    this->previousMillis_1 = this->currentMillis_1 = this->previousMillis_2 = this->currentMillis_2 = millis();
+    this->previousMicros_1 = this->currentMicros_1 = this->previousMicros_2 = this->currentMicros_2 = micros();
     this->elapsedTime = 0;
     this->state = false;
     this->toggleStatePhase = WAIT_MILLIS;
@@ -25,9 +29,24 @@ void TimerKernel::resetTimer() {
 }
 
 
+void TimerKernel::resetToggleState() {
+    this->previousMillis_2 = this->currentMillis_2 = millis();
+    this->previousMicros_2 = this->currentMicros_2 = micros();
+    this->toggleStatePhase = WAIT_MILLIS;
+    this->state = false;
+}
+
+
+void TimerKernel::resetHasExpired() {
+    this->previousMillis_1 = this->currentMillis_1 = millis();
+    this->previousMicros_1 = this->currentMicros_1 = micros();
+    this->hasExpiredPhase = WAIT_MILLIS;
+}
+
+
 void TimerKernel::updateCurrentTime() {
-    this->currentMillis = millis();
-    this->currentMicros = micros();
+    this->currentMillis_1 = this->currentMillis_2 = millis();
+    this->currentMicros_1 = this->currentMicros_2 = micros();
 }
 
 
@@ -43,15 +62,15 @@ bool TimerKernel::toggleState(double duration, TimeUnit unit) {
 
     switch (toggleStatePhase) {
         case WAIT_MILLIS:
-            if (this->currentMillis - this->previousMillis >= durationInMillis || durationInMillis == 0) {
-                this->previousMillis = millis();
+            if (this->currentMillis_2 - this->previousMillis_2 >= durationInMillis || durationInMillis == 0) {
+                this->previousMillis_2 = millis();
                 this->toggleStatePhase = WAIT_MICROS;
             }
             break;
         
         case WAIT_MICROS:
-            if (this->currentMicros - this->previousMicros >= remainingMicros || (remainingMicros == 0 && durationInMillis != 0)) {
-                this->previousMicros = micros();
+            if (this->currentMicros_2 - this->previousMicros_2 >= remainingMicros || (remainingMicros == 0 && durationInMillis != 0)) {
+                this->previousMicros_2 = micros();
                 this->state = !this->state;
                 this->toggleStatePhase = WAIT_MILLIS;
             }
@@ -74,15 +93,15 @@ bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
 
     switch (hasExpiredPhase) {
         case WAIT_MILLIS:
-            if (this->currentMillis - this->previousMillis >= durationInMillis || durationInMillis == 0) {
-                this->previousMillis = millis();
+            if (this->currentMillis_1 - this->previousMillis_1 >= durationInMillis || durationInMillis == 0) {
+                this->previousMillis_1 = millis();
                 this->hasExpiredPhase = WAIT_MICROS;
             }
             break;
         
         case WAIT_MICROS:
-            if (this->currentMicros - this->previousMicros >= remainingMicros || (remainingMicros == 0 && durationInMillis != 0)) {
-                this->previousMicros = micros();
+            if (this->currentMicros_1 - this->previousMicros_1 >= remainingMicros || (remainingMicros == 0 && durationInMillis != 0)) {
+                this->previousMicros_1 = micros();
                 this->hasExpiredPhase = WAIT_MILLIS;
                 return true;
             }
@@ -116,5 +135,4 @@ unsigned long TimerKernel::convertToMicrosecond(double duration, TimeUnit unit) 
 
     return durationInMicros;
 }
-
 

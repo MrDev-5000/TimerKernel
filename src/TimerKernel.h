@@ -21,16 +21,22 @@ private:
 
     TimerPhase toggleStatePhase;
     TimerPhase hasExpiredPhase;
-    unsigned long previousMillis;
-    unsigned long previousMicros;
-    unsigned long currentMillis;
-    unsigned long currentMicros;
+    unsigned long previousMillis_1;
+    unsigned long previousMicros_1;
+    unsigned long currentMillis_1;
+    unsigned long currentMicros_1;
+    unsigned long previousMillis_2;
+    unsigned long previousMicros_2;
+    unsigned long currentMillis_2;
+    unsigned long currentMicros_2;
     unsigned long elapsedTime;
     bool state;
 
 public:
     TimerKernel();
     void resetTimer();
+    void resetToggleState();
+    void resetHasExpired();
     bool toggleState(double duration, TimeUnit unit = MILLISECOND);
     bool hasExpired(double duration, TimeUnit unit = MILLISECOND);
 
@@ -42,7 +48,6 @@ private:
 
 
 #endif 
-
 
 
 
