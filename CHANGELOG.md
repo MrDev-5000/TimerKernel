@@ -1,5 +1,10 @@
 # Change log
 
+## v1.2.3
+
+- Add: example timed_event.ino
+- Add: timed_event.ino to examples section in Documentation.
+
 ## v1.1.3
 
 - Add: method to reset `toggleState()` and `hasExpired()` separately.

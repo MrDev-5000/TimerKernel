@@ -102,7 +102,8 @@ void loop() {
 
 ## 📖 Examples
 
-- [simple_led_blink](examples/simple_led_blink/simple_led_blink.ino) - demonstrates how to use the `toggleState()` to blink a led.
+- [simple_led_blink](examples/simple_led_blink/simple_led_blink.ino) - demonstrates how to use `toggleState()` to blink a led.
+- [timed_event](examples/timed_event/timed_event.ino) - demonstrates how to use `hasExpired()` to do a task periodically.
 
 ## 📚 API Reference
 
