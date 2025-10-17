@@ -7,6 +7,10 @@
 TimerKernel::TimerKernel() : 
     toggleStatePhase(WAIT_MILLIS),
     hasExpiredPhase(WAIT_MILLIS),
+    toggleStateRunCount(0),
+    hasExpiredRunCount(0),
+    toggleStateCycle(0),
+    hasExpiredCycle(0),
     previousMillis_1(0),
     previousMicros_1(0),
     currentMillis_1(0),
@@ -26,12 +30,15 @@ void TimerKernel::resetTimer() {
     this->state = false;
     this->toggleStatePhase = WAIT_MILLIS;
     this->hasExpiredPhase = WAIT_MILLIS;
+    this->toggleStateRunCount = this->toggleStateCycle = 0;
+    this->hasExpiredRunCount = this->hasExpiredCycle = 0;
 }
 
 
 void TimerKernel::resetToggleState() {
     this->previousMillis_2 = this->currentMillis_2 = millis();
     this->previousMicros_2 = this->currentMicros_2 = micros();
+    this->toggleStateRunCount = this->toggleStateCycle = 0;
     this->toggleStatePhase = WAIT_MILLIS;
     this->state = false;
 }
@@ -40,6 +47,7 @@ void TimerKernel::resetToggleState() {
 void TimerKernel::resetHasExpired() {
     this->previousMillis_1 = this->currentMillis_1 = millis();
     this->previousMicros_1 = this->currentMicros_1 = micros();
+    this->hasExpiredRunCount = this->hasExpiredCycle = 0;
     this->hasExpiredPhase = WAIT_MILLIS;
 }
 
@@ -50,7 +58,7 @@ void TimerKernel::updateCurrentTime() {
 }
 
 
-bool TimerKernel::toggleState(double duration, TimeUnit unit) {
+bool TimerKernel::toggleState(double duration, TimeUnit unit, int runAmount) {
 
     unsigned long durationInMicros = convertToMicrosecond(duration, unit);
     unsigned long durationInMillis = durationInMicros / 1000UL;
@@ -58,7 +66,7 @@ bool TimerKernel::toggleState(double duration, TimeUnit unit) {
 
     updateCurrentTime();
 
-    if (durationInMicros == 0) return this->state;
+    if (durationInMicros == 0 || toggleStateRunCount == runAmount) return this->state;
 
     switch (toggleStatePhase) {
         case WAIT_MILLIS:
@@ -73,6 +81,15 @@ bool TimerKernel::toggleState(double duration, TimeUnit unit) {
                 this->previousMicros_2 = micros();
                 this->state = !this->state;
                 this->toggleStatePhase = WAIT_MILLIS;
+
+                if(this->toggleStateCycle == 1) {
+                    this->toggleStateRunCount++;
+                    this->toggleStateCycle = 0;
+                }
+
+                else {
+                    this->toggleStateCycle++;
+                } 
             }
             break;
     }
@@ -81,7 +98,7 @@ bool TimerKernel::toggleState(double duration, TimeUnit unit) {
 }
 
 
-bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
+bool TimerKernel::hasExpired(double duration, TimeUnit unit, int runAmount) {
 
     unsigned long durationInMicros = convertToMicrosecond(duration, unit);
     unsigned long durationInMillis = durationInMicros / 1000UL;
@@ -89,7 +106,7 @@ bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
 
     updateCurrentTime();
 
-    if (durationInMicros == 0) return false;
+    if ((durationInMicros == 0) || hasExpiredRunCount == runAmount) return false;
 
     switch (hasExpiredPhase) {
         case WAIT_MILLIS:
@@ -103,11 +120,19 @@ bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
             if (this->currentMicros_1 - this->previousMicros_1 >= remainingMicros || (remainingMicros == 0 && durationInMillis != 0)) {
                 this->previousMicros_1 = micros();
                 this->hasExpiredPhase = WAIT_MILLIS;
+
+                if(this->hasExpiredCycle == 1) {
+                    this->hasExpiredRunCount++;
+                    this->hasExpiredCycle = 0;
+                }
+
+                else {
+                    this->hasExpiredCycle++;
+                } 
                 return true;
             }
             break;
     }
-
     return false;
 }
 
