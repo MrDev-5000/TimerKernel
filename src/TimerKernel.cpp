@@ -58,7 +58,7 @@ bool TimerKernel::toggleState(double duration, TimeUnit unit) {
 
     updateCurrentTime();
 
-    if (remainingMicros == 0 && durationInMillis == 0) return this->state;
+    if (durationInMicros == 0) return this->state;
 
     switch (toggleStatePhase) {
         case WAIT_MILLIS:
@@ -89,7 +89,7 @@ bool TimerKernel::hasExpired(double duration, TimeUnit unit) {
 
     updateCurrentTime();
 
-    if (remainingMicros == 0 && durationInMillis == 0) return false;
+    if (durationInMicros == 0) return false;
 
     switch (hasExpiredPhase) {
         case WAIT_MILLIS:

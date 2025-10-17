@@ -1,13 +1,23 @@
 # Change log
 
+## v1.2.4
+
+- Fix: simplified expression `if(remainingMicros == 0 && durationInMillis == 0)` to `if(durationInMicros == 0)`.
+
+---
+
 ## v1.2.3
 
 - Add: example timed_event.ino
 - Add: timed_event.ino to examples section in Documentation.
 
+---
+
 ## v1.1.3
 
 - Add: method to reset `toggleState()` and `hasExpired()` separately.
+
+---
 
 ## v1.0.3
 
