@@ -31,6 +31,5 @@ void loop() {
   /**
    * @brief Blink the built-in LED infinitely (with 1 sec durations)
    */
-  digitalWrite(LED_BUILTIN, MyTimer.toggledState(durationInSec, SECOND, TimerKernel::INFINITE));
+  digitalWrite(LED_BUILTIN, MyTimer.toggleState(durationInSec, SECOND, TimerKernel::INFINITE));
 }
-
