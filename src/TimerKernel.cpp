@@ -129,7 +129,8 @@ bool TimerKernel::hasExpired(double duration, TimeUnit unit, int runAmount) {
                 else {
                     this->hasExpiredCycle++;
                 } 
-                return true;
+                
+                if (hasExpiredRunCount != runAmount) return true;
             }
             break;
     }
@@ -160,4 +161,5 @@ unsigned long TimerKernel::convertToMicrosecond(double duration, TimeUnit unit) 
 
     return durationInMicros;
 }
+
 
