@@ -1,5 +1,7 @@
 # ⏱️ TimerKernel
 
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/mrdev-5000/library/TimerKernel.svg)](https://registry.platformio.org/libraries/mrdev-5000/TimerKernel) [![GitHub release](https://img.shields.io/github/v/release/MrDev-5000/TimerKernel)](https://github.com/MrDev-5000/TimerKernel/releases) [![License](https://img.shields.io/github/license/MrDev-5000/TimerKernel)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/MrDev-5000/TimerKernel)](https://github.com/MrDev-5000/TimerKernel/issues)  
+
 >TimerKernel is a lightweight Arduino library for managing non-blocking timers
 
 ---
@@ -11,6 +13,7 @@
 - Multiple independent timers can be used simultaneously
 - Simple and intuitive API
 - Supports Floating Point duration for ease of use and percise timing
+- Supports running timer only a stated number of times
 
 ## ⚙️ Installation
 
@@ -104,46 +107,53 @@ void loop() {
 
 - [simple_led_blink](examples/simple_led_blink/simple_led_blink.ino) - demonstrates how to use `toggleState()` to blink a led.
 - [timed_event](examples/timed_event/timed_event.ino) - demonstrates how to use `hasExpired()` to do a task periodically.
+- [run_n_times](examples/run_n_times/run_n_times.ino) - demonstrates how to run timer only a specific number of times.
+- [run_n_times-advanced](examples/run_n_times-advanced/run_n_times-advanced.ino) - demonstrates how to restart timers on button press.
 
 ## 📚 API Reference
 
 ### `hasExpired()`
 
 ```cpp
-  bool hasExpired(double duration, TimeUnit unit = MILLISECOND);
+  bool hasExpired(double duration, TimeUnit unit = MILLISECOND, int runAmount = INFINITE);
 ```
 
-Checks whether the specified time duration has passed.
+`hasExpired()` runs `runAmount` of times. 
+It checks whether the specified time duration has passed.
 By default, the duration is expressed in milliseconds.
 
-| Parameter  | Type     | Description                                                  |
-| :--------  | :------- | :----------------------------------------------------------- |
-| `duration` | `double` | Time interval in desired unit                                |
-| `unit`     | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
+| Parameter   | Type     | Description                                                  |
+| :---------- | :------- | :----------------------------------------------------------- |
+| `duration`  | `double` | Time interval in desired unit                                |
+| `unit`      | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
+| `runAmount` | `int`    | Number of times to run `hasExpired()`                        |
 
 **Returns:**
 
-- `true` if the time duration has elapsed, otherwise it returns `false`.
+- `true` if the specified time duration has elapsed and `hasExpired()` has not yet been executed `runAmount` times, otherwise returns `false`
+.
 
 ---
 
 ### `toggleState()`
 
 ```cpp
-  bool toggleState(double duration, TimeUnit unit = MILLISECOND);
+  bool toggleState(double duration, TimeUnit unit = MILLISECOND, int runAmount = INFINITE);
 ```
 
-Toggles state every time the duration elapses.
+`toggleState()` runs `runAmount` of times.
+It toggles state every time the duration elapses.
 By default, the duration is expressed in milliseconds.
 
-| Parameter  | Type     | Description                                                  |
-| :--------  | :------- | :----------------------------------------------------------- |
-| `duration` | `double` | Time interval in desired unit                                |
-| `unit`     | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
+| Parameter   | Type     | Description                                                  |
+| :---------- | :------- | :----------------------------------------------------------- |
+| `duration`  | `double` | Time interval in desired unit                                |
+| `unit`      | `enum`   | Time unit (`MINUTE`, `SECOND`, `MILLISECOND`, `MICROSECOND`) |
+| `runAmount` | `int`    | Number of times to run `hasExpired()`                        |
 
 **Returns:**
 
-- The toggled state (`true` or `false`).
+- The toggled state (`true` or `false`) if `toggleState()` has not yet been executed `runAmount` times. otherwise returns `false`.
 
 ---
 
@@ -153,7 +163,7 @@ By default, the duration is expressed in milliseconds.
   void resetTimer();
 ```
 
-Resets both `hasExpired()` and `toggleState()`, so they start counting from zero.
+Resets both `hasExpired()` and `toggleState()`, causing them to start counting from zero. Calling this function restarts the cycles of both timers until `runAmount` is reached.
 
 **Returns:**
 
@@ -167,7 +177,7 @@ Resets both `hasExpired()` and `toggleState()`, so they start counting from zero
   void resetToggleState();
 ```
 
-Resets `toggleState()`, so it starts counting from zero.
+Resets `toggleState()` function, causing it to start counting from zero. Calling this function restarts the toggle cycle until `runAmount` is reached.
 
 **Returns:**
 
@@ -181,11 +191,16 @@ Resets `toggleState()`, so it starts counting from zero.
   void resetHasExpired();
 ```
 
-Resets `hasExpired()`, so it starts counting from zero.
+Resets `hasExpired()` function, causing it to start counting from zero. Calling this function restarts the timing cycle until `runAmount` is reached.
 
 **Returns:**
 
 - Nothing
+
+>**Note:**
+>
+> - By Default, all durations are interpreted in millisecond. 
+> - By Default, all timers run infinitely. 
 
 ## 📜 License
 

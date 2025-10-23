@@ -1,5 +1,13 @@
 # Change log
 
+## v1.3.4
+
+- Add: feature to run `hasExpired()` and `toggleState()` a specific number of times.
+- Add: example run_n_times.ino
+- Add: example run_n_times-advanced.ino
+
+---
+
 ## v1.2.4
 
 - Fix: simplified expression `if(remainingMicros == 0 && durationInMillis == 0)` to `if(durationInMicros == 0)`.
