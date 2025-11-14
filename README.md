@@ -1,6 +1,6 @@
 # ⏱️ TimerKernel
 
-[![PlatformIO Registry](https://badges.registry.platformio.org/packages/mrdev-5000/library/TimerKernel.svg)](https://registry.platformio.org/libraries/mrdev-5000/TimerKernel) [![GitHub release](https://img.shields.io/github/v/release/MrDev-5000/TimerKernel)](https://github.com/MrDev-5000/TimerKernel/releases) [![License](https://img.shields.io/github/license/MrDev-5000/TimerKernel)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/MrDev-5000/TimerKernel)](https://github.com/MrDev-5000/TimerKernel/issues)  
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/mrdev-5000/library/TimerKernel.svg)](https://registry.platformio.org/libraries/mrdev-5000/TimerKernel) [![License](https://img.shields.io/github/license/MrDev-5000/TimerKernel)](LICENSE) [![GitHub issues](https://img.shields.io/github/issues/MrDev-5000/TimerKernel)](https://github.com/MrDev-5000/TimerKernel/issues)  
 
 >TimerKernel is a lightweight Arduino library for managing non-blocking timers
 
